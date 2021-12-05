@@ -6,11 +6,12 @@
 //
 
 #include <stdio.h>
+#include <stdlib.h>
 
 //find string length
 int length(char string[]);
 //change case
-char* re_case(char string[], char function[]);
+char* re_case(char string[]);
 //count vowels
 int count_v(char string[]);
 //count consonants
@@ -38,9 +39,11 @@ int anagram(char string_1[], char string_2[]);
 
 int main(int argc, const char * argv[]) {
     // insert code here...
-    char s[] = "strahinja jokic";
+    char s[] = "sTrAhInJa jokic";
     int strLen = length(s);
     printf("%d\n", strLen);
+    char* str = re_case(s);
+    printf("%s\n", str);
     return 0;
 }
 
@@ -50,3 +53,19 @@ int length(char string[]){
         i++;
     return i;
 }
+
+char* re_case(char string[]){
+    int strlen = length(string);
+    char* returnString = (char*)malloc(sizeof(char)*strlen);
+    for(int i = 0; i < strlen; i++){
+        if(string[i] > 64 && string[i] < 91)
+            returnString[i] = string[i] + 32;
+        else if(string[i] > 96 && string[i] < 123)
+            returnString[i] = string[i] - 32;
+        else
+            returnString[i] = string[i];
+    }
+    returnString[strlen] = '\0';
+    return returnString;
+}
+
