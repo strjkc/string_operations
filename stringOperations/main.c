@@ -121,7 +121,7 @@ int count_c(char string[]){
     int counter = 0;
     int strlen = length(normalised_string);
     for(int i = 0; i < strlen ; i++){
-        if(normalised_string[i] != 'a' && normalised_string[i] != 'e' && normalised_string[i] != 'i' && normalised_string[i] != 'o' && normalised_string[i] != 'u')
+        if(normalised_string[i] != 'a' && normalised_string[i] != 'e' && normalised_string[i] != 'i' && normalised_string[i] != 'o' && normalised_string[i] != 'u' && normalised_string[i] > 96 && normalised_string[i] < 123)
             counter++;
     }
     return counter;
