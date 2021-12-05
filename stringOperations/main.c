@@ -12,6 +12,10 @@
 int length(char string[]);
 //change case
 char* re_case(char string[]);
+// to lower case
+char* to_lower(char string[]);
+// to upper case
+char* to_upper(char string[]);
 //count vowels
 int count_v(char string[]);
 //count consonants
@@ -39,11 +43,13 @@ int anagram(char string_1[], char string_2[]);
 
 int main(int argc, const char * argv[]) {
     // insert code here...
-    char s[] = "sTrAhInJa jokic";
+    char s[] = "    ";
     int strLen = length(s);
     printf("%d\n", strLen);
     char* str = re_case(s);
     printf("%s\n", str);
+    int vowels = count_v(s);
+    printf("%d\n", vowels);
     return 0;
 }
 
@@ -68,4 +74,29 @@ char* re_case(char string[]){
     returnString[strlen] = '\0';
     return returnString;
 }
+
+char* to_lower(char string[]){
+    int strlen = length(string);
+    char* returnString = (char*)malloc(sizeof(char)*strlen);
+    for(int i = 0; i < strlen; i++){
+        if(string[i] > 64 && string[i] < 91)
+            returnString[i] = string[i] + 32;
+        else
+            returnString[i] = string[i];
+    }
+    returnString[strlen] = '\0';
+    return returnString;
+}
+
+int count_v(char string[]){
+    char* normalised_string = to_lower(string);
+    int counter = 0;
+    int strlen = length(normalised_string);
+    for(int i = 0; i < strlen ; i++){
+        if(normalised_string[i] == 'a' || normalised_string[i] == 'e' || normalised_string[i] == 'i' || normalised_string[i] == 'o' || normalised_string[i] == 'u')
+            counter++;
+    }
+    return counter;
+}
+
 
