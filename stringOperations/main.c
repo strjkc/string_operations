@@ -43,13 +43,15 @@ int anagram(char string_1[], char string_2[]);
 
 int main(int argc, const char * argv[]) {
     // insert code here...
-    char s[] = "    ";
+    char s[] = "StraHINJa JokIC";
     int strLen = length(s);
-    printf("%d\n", strLen);
+    printf("length: %d\n", strLen);
     char* str = re_case(s);
-    printf("%s\n", str);
+    printf("case switch: %s\n", str);
     int vowels = count_v(s);
-    printf("%d\n", vowels);
+    printf("vowels: %d\n", vowels);
+    int consonants = count_c(s);
+    printf("consonants: %d\n", consonants);
     return 0;
 }
 
@@ -112,4 +114,14 @@ int count_v(char string[]){
     return counter;
 }
 
+int count_c(char string[]){
+    char* normalised_string = to_lower(string);
+    int counter = 0;
+    int strlen = length(normalised_string);
+    for(int i = 0; i < strlen ; i++){
+        if(normalised_string[i] != 'a' && normalised_string[i] != 'e' && normalised_string[i] != 'i' && normalised_string[i] != 'o' && normalised_string[i] != 'u')
+            counter++;
+    }
+    return counter;
+}
 
