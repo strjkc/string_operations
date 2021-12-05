@@ -43,23 +43,26 @@ int anagram(char string_1[], char string_2[]);
 
 int main(int argc, const char * argv[]) {
     // insert code here...
-    char s[] = "strahinja";
-    char s2[] = "strahinja";
+    char first_string[] = "strahinja";
+    char second_string[] = "strahin";
+    char to_be_reversed[] = "strahinja";
     
-    int strLen = length(s);
+    int strLen = length(first_string);
     printf("length: %d\n", strLen);
-    char* str = re_case(s);
+    char* str = re_case(first_string);
     printf("case switch: %s\n", str);
-    int vowels = count_v(s);
+    int vowels = count_v(first_string);
     printf("vowels: %d\n", vowels);
-    int consonants = count_c(s);
+    int consonants = count_c(first_string);
     printf("consonants: %d\n", consonants);
-    int word_count = count_w(s);
+    int word_count = count_w(first_string);
     printf("Word count: %d\n", word_count);
-    char* reversed_string = reverse_prim(s);
+    char* reversed_string = reverse_prim(first_string);
     printf("Reversed string: %s\n", reversed_string);
-    reverse_sec(s2);
-    printf("Reversed second string: %s\n", s2);
+    reverse_sec(to_be_reversed);
+    printf("Reversed second string: %s\n", to_be_reversed);
+    int areTheSame = compare(first_string, second_string);
+    printf("Are the strings the same: %d\n", areTheSame);
     return 0;
 }
 
@@ -168,6 +171,14 @@ void reverse_sec(char string[]){
         string[i] = string[k];
         string[k] = temp;
     }
+}
+
+int compare(char string_1[], char string_2[]){
+    for(int i = 0; string_1[i] != '\0' || string_2[i] != '\0'; i++){
+        if(string_1[i] != string_2[i])
+            return 0;
+    }
+    return 1;
 }
 
 
