@@ -8,7 +8,7 @@
 #include <stdio.h>
 
 //find string length
-int legth(char string[]);
+int length(char string[]);
 //change case
 char* re_case(char string[], char function[]);
 //count vowels
@@ -38,6 +38,15 @@ int anagram(char string_1[], char string_2[]);
 
 int main(int argc, const char * argv[]) {
     // insert code here...
-    char s[] = "strahinja";
+    char s[] = "strahinja jokic";
+    int strLen = length(s);
+    printf("%d\n", strLen);
     return 0;
+}
+
+int length(char string[]){
+    int i = 0;
+    while(string[i] != '\0')
+        i++;
+    return i;
 }
