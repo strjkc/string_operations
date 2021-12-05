@@ -88,6 +88,19 @@ char* to_lower(char string[]){
     return returnString;
 }
 
+char* to_upper(char string[]){
+    int strlen = length(string);
+    char* returnString = (char*)malloc(sizeof(char)*strlen);
+    for(int i = 0; i < strlen; i++){
+        if(string[i] > 96 && string[i] < 123)
+            returnString[i] = string[i] - 32;
+        else
+            returnString[i] = string[i];
+    }
+    returnString[strlen] = '\0';
+    return returnString;
+}
+
 int count_v(char string[]){
     char* normalised_string = to_lower(string);
     int counter = 0;
