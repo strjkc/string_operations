@@ -46,6 +46,7 @@ int main(int argc, const char * argv[]) {
     char first_string[] = "strahinja";
     char second_string[] = "strahin";
     char to_be_reversed[] = "strahinja";
+    char palindrom_test_1[] = "";
     
     int strLen = length(first_string);
     printf("length: %d\n", strLen);
@@ -63,6 +64,8 @@ int main(int argc, const char * argv[]) {
     printf("Reversed second string: %s\n", to_be_reversed);
     int areTheSame = compare(first_string, second_string);
     printf("Are the strings the same: %d\n", areTheSame);
+    int palindrome = is_palindrome(palindrom_test_1);
+    printf("Is the string a palidrome: %d\n", palindrome);
     return 0;
 }
 
@@ -180,6 +183,17 @@ int compare(char string_1[], char string_2[]){
     }
     return 1;
 }
+
+int is_palindrome(char string[]){
+    int i,j;
+    int strlen = length(string);
+    for(i = 0, j = strlen - 1; i < j; i++, j--){
+        if(string[i] != string[j])
+            return 0;
+    }
+    return 1;
+}
+
 
 
 
