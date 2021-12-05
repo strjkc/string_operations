@@ -25,7 +25,7 @@ int count_w(char string[]);
 //reverse string using second array
 char* reverse_prim(char string[]);
 //reverse string using original character array
-void reverse_sec(char* string[]);
+void reverse_sec(char string[]);
 //compare strings
 int compare(char string_1[], char string_2[]);
 //is the string a palindrome
@@ -43,7 +43,9 @@ int anagram(char string_1[], char string_2[]);
 
 int main(int argc, const char * argv[]) {
     // insert code here...
-    char s[] = "    StraHINJa  JokIC    ";
+    char s[] = "strahinja";
+    char s2[] = "strahinja";
+    
     int strLen = length(s);
     printf("length: %d\n", strLen);
     char* str = re_case(s);
@@ -54,6 +56,10 @@ int main(int argc, const char * argv[]) {
     printf("consonants: %d\n", consonants);
     int word_count = count_w(s);
     printf("Word count: %d\n", word_count);
+    char* reversed_string = reverse_prim(s);
+    printf("Reversed string: %s\n", reversed_string);
+    reverse_sec(s2);
+    printf("Reversed second string: %s\n", s2);
     return 0;
 }
 
@@ -142,5 +148,28 @@ int count_w(char string[]){
     }
     return word_count;
 }
+
+char* reverse_prim(char string[]){
+    int strlen = length(string);
+    char* return_string = (char*) malloc(sizeof(char) * strlen);
+    int i,k;
+    for(i = strlen - 1, k = 0; i >= 0; i--, k++){
+        return_string[k] = string[i];
+    }
+    return_string[strlen] = '\0';
+    return return_string;
+}
+
+void reverse_sec(char string[]){
+    int i,k;
+    int strlen = length(string);
+    for(i = 0, k = strlen - 1; i < k; i++, k--){
+        char temp = string[i];
+        string[i] = string[k];
+        string[k] = temp;
+    }
+}
+
+
 
 // " strahinja JOkic "
