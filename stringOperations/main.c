@@ -43,7 +43,7 @@ int anagram(char string_1[], char string_2[]);
 
 int main(int argc, const char * argv[]) {
     // insert code here...
-    char s[] = "StraHINJa JokIC";
+    char s[] = "    StraHINJa  JokIC    ";
     int strLen = length(s);
     printf("length: %d\n", strLen);
     char* str = re_case(s);
@@ -52,6 +52,8 @@ int main(int argc, const char * argv[]) {
     printf("vowels: %d\n", vowels);
     int consonants = count_c(s);
     printf("consonants: %d\n", consonants);
+    int word_count = count_w(s);
+    printf("Word count: %d\n", word_count);
     return 0;
 }
 
@@ -125,3 +127,20 @@ int count_c(char string[]){
     return counter;
 }
 
+int count_w(char string[]){
+    int in_word = 0;
+    int word_count = 0;
+    int strlen = length(string);
+    for(int i = 0; i < strlen; i++){
+        if((string[i] != ' ' && string[i] != '\t' && string[i] != '\n') && in_word == 0){
+            word_count++;
+            in_word = 1;
+        }
+        if(string[i] == ' ' || string[i] == '\t' || string[i] == '\n'){
+            in_word = 0;
+        }
+    }
+    return word_count;
+}
+
+// " strahinja JOkic "
