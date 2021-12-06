@@ -30,7 +30,7 @@ void reverse_sec(char string[]);
 int compare(char string_1[], char string_2[]);
 //is the string a palindrome
 int is_palindrome(char string[]);
-//check for duplicate characters O(n^2)
+//check for duplicate characters O(n^3)
 char* duplicates(char string[]);
 //check for duplicate characters hashmap O(n)
 char* duplicates_hash(char string[]);
@@ -43,10 +43,11 @@ int anagram(char string_1[], char string_2[]);
 
 int main(int argc, const char * argv[]) {
     // insert code here...
-    char first_string[] = "strahinja";
+    char first_string[] = "ttt  aaa";
     char second_string[] = "strahin";
     char to_be_reversed[] = "strahinja";
     char palindrom_test_1[] = "";
+    char duplicate_test[] = " a a a q q q z z z     ##aaaa";
     
     int strLen = length(first_string);
     printf("length: %d\n", strLen);
@@ -66,6 +67,15 @@ int main(int argc, const char * argv[]) {
     printf("Are the strings the same: %d\n", areTheSame);
     int palindrome = is_palindrome(palindrom_test_1);
     printf("Is the string a palidrome: %d\n", palindrome);
+    char* duplicates_arr = duplicates(first_string);
+    printf("Duplicate characters are: %s\n", duplicates_arr);
+    char* duplicates_sec = duplicates_hash(duplicate_test);
+    
+    for(int i = 0; i < 26; i++){
+        if(duplicates_sec[i] != 0)
+            printf("Letter %c repeated %d times, ", i + 97, duplicates_sec[i]);
+    }
+    
     return 0;
 }
 
@@ -193,6 +203,48 @@ int is_palindrome(char string[]){
     }
     return 1;
 }
+
+char* duplicates(char string[]){
+    int strlen = length(string);
+    char* return_array = (char*) malloc(sizeof(char)*strlen);
+    int j = 0;
+    for(int i = 0; i < strlen; i++){
+        if (string[i] != -1){
+            for(int k = i + 1; k < strlen; k++){
+                if(string[i] == string[k]){
+                    int is_already_stored = 0;
+                    for(int m = 0; m < j; m++){
+                        if(string[k] == return_array[m])
+                            is_already_stored = 1;
+                    }
+                    if(!is_already_stored){
+                        return_array[j] = string[i];
+                        string[k] = -1;
+                        j++;
+                    }
+                }
+            }
+        }
+    }
+    return return_array;
+}
+
+char* duplicates_hash(char string[]){
+    int strlen = length(string);
+    int number_of_letters = 26;
+    char* hash_array = (char*) malloc(sizeof(char)*number_of_letters);
+    char* normalized_string = to_lower(string);
+    //initialize array to zeroes
+    for(int i = 0; i < number_of_letters; i++){
+        hash_array[i] = 0;
+    }
+    for(int j = 0; j < strlen; j++){
+        int position = normalized_string[j] - 97;
+        hash_array[position] += 1;
+    }
+    return hash_array;
+}
+
 
 
 
