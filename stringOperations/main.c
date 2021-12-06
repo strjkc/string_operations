@@ -35,7 +35,7 @@ char* duplicates(char string[]);
 //check for duplicate characters hashmap O(n)
 char* duplicates_hash(char string[]);
 //check for duplicate characters bitwise
-char* duplicate_bit(char string[]);
+int duplicate_bit(char string[]);
 //check if second string is an anagram of the first
 int anagram(char string_1[], char string_2[]);
 //print all permutations of a string
@@ -47,7 +47,7 @@ int main(int argc, const char * argv[]) {
     char second_string[] = "strahin";
     char to_be_reversed[] = "strahinja";
     char palindrom_test_1[] = "";
-    char duplicate_test[] = " a a a q q q z z z     ##aaaa";
+    char duplicate_test[] = "a   abbcczzz";
     
     int strLen = length(first_string);
     printf("length: %d\n", strLen);
@@ -73,7 +73,15 @@ int main(int argc, const char * argv[]) {
     
     for(int i = 0; i < 26; i++){
         if(duplicates_sec[i] != 0)
-            printf("Letter %c repeated %d times, ", i + 97, duplicates_sec[i]);
+            printf("Letter %c repeated %d times, \n", i + 97, duplicates_sec[i]);
+    }
+    printf("\n");
+    int bit_map = duplicate_bit(duplicate_test);
+    for(int m = 0; m < 26; m++){
+        int comparator = 1;
+        comparator = comparator << m;
+        if((bit_map & comparator) > 0)
+            printf("Letter %c is repeated, \n", m + 97);
     }
     
     return 0;
@@ -244,6 +252,22 @@ char* duplicates_hash(char string[]){
     }
     return hash_array;
 }
+
+int duplicate_bit(char string[]){
+    int bit_map = 0;
+    int number_of_letters = 26;
+    char* normalized_string = to_lower(string);
+    int strlen = length(string);
+    int k = 0;
+    for(int i = 0; i < strlen; i++){
+        int comparator = 1;
+        comparator = comparator << (normalized_string[i] - 97);
+        bit_map = bit_map | comparator;
+    }
+    return bit_map;
+}
+
+
 
 
 
