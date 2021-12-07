@@ -255,10 +255,8 @@ char* duplicates_hash(char string[]){
 
 int duplicate_bit(char string[]){
     int bit_map = 0;
-    int number_of_letters = 26;
     char* normalized_string = to_lower(string);
     int strlen = length(string);
-    int k = 0;
     for(int i = 0; i < strlen; i++){
         int comparator = 1;
         comparator = comparator << (normalized_string[i] - 97);
@@ -266,6 +264,9 @@ int duplicate_bit(char string[]){
     }
     return bit_map;
 }
+
+
+
 
 
 
