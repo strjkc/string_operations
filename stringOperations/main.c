@@ -48,6 +48,8 @@ int main(int argc, const char * argv[]) {
     char to_be_reversed[] = "strahinja";
     char palindrom_test_1[] = "";
     char duplicate_test[] = "a   abbcczzz";
+    char anagram_test_1[] = "strahinja";
+    char anagram_test_2[] = "Astri        Jahn";
     
     int strLen = length(first_string);
     printf("length: %d\n", strLen);
@@ -84,6 +86,8 @@ int main(int argc, const char * argv[]) {
             printf("Letter %c is repeated, \n", m + 97);
     }
     
+    int is_anagram = anagram(anagram_test_1, anagram_test_2);
+    printf("The string is an anagram: %d\n", is_anagram);
     return 0;
 }
 
@@ -263,6 +267,34 @@ int duplicate_bit(char string[]){
         bit_map = bit_map | comparator;
     }
     return bit_map;
+}
+
+int anagram(char string_1[], char string_2[]){
+    int number_of_letters = 26;
+    int* hash_map = (int*) malloc(sizeof(int) * number_of_letters);
+    int string_1_length = length(string_1);
+    int string_2_length = length(string_2);
+    char* normalised_1 = to_lower(string_1);
+    char* normalised_2 = to_lower(string_2);
+    //init all indexes to 0
+    for(int i = 0; i < number_of_letters; i++){
+        hash_map[i] = 0;
+    }
+    // update map for first string
+    for(int i = 0; i < string_1_length; i++){
+        int position = normalised_1[i] - 97;
+        hash_map[position] += 1;
+    }
+    // update map for second string
+    for(int i = 0; i < string_2_length; i++){
+        int position = normalised_2[i] - 97;
+        hash_map[position] -= 1;
+    }
+  for(int i = 0; i < number_of_letters; i++){
+        if (hash_map[i] != 0)
+            return 0;
+    }
+    return 1;
 }
 
 
